@@ -1,11 +1,8 @@
 ## Two functions to cache the inverse of a matrix
 ## For brevity, we are assuming that the matrix can be inverted
 
-## makeCacheMatrix: This function creates a special "matrix" object that can 
-## cache its inverse.
-
-## cacheSolve: This function computes the inverse of the special "matrix" 
-## returned by makeCacheMatrix above. 
+## makeCacheMatrix: This function creates a special "matrix" object that can cache its inverse.
+## cacheSolve: This function computes the inverse of the special "matrix" returned by makeCacheMatrix above. 
 
 
 ## makeCacheMatrix generates a list of 4 newly created functions:
