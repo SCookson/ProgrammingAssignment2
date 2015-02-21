@@ -8,11 +8,11 @@
 ## returned by makeCacheMatrix above. 
 
 
-## The 1st function, makeCacheMatrix, generates a list of 4 newly created functions:
+## makeCacheMatrix generates a list of 4 newly created functions:
 ## i.   set: which recreates the original matrix
 ## ii.  get: which reaches back into the calling environment to retrieve the above matrix
 ## iii. setinverse: generates the inverse of the above matrix and caches it
-## iv.  getinverse: reaches back into the calling environment to retrieve the inverse of the matrix
+## iv.  getinverse: reaches back into the calling environment to retrieve the inverted matrix
 
 makeCacheMatrix <- function(x = matrix()) {	
       m <- NULL  		## 'm' is an empty matrix within the makeCacheMatrix environment
@@ -21,9 +21,9 @@ makeCacheMatrix <- function(x = matrix()) {
       m <<- NULL		## Deep assignment: so 'm' is still an empty vector outside the makeCacheMatrix environment
       }
       get <- function() x	        ## ii. Function returning matrix 'x'
-      setinverse <- function(solve) m <<- solve	## iii. Function that calculates the inverse of a matrix within the makeCacheMatrix
+      setinverse <- function(solve) m <<- solve	## iii. Function calculating the inverted matrix
       getinverse <- function() m  ## iv. Function returning the inverted matrix
-      list(set = set, get = get,  ## returns the list of the four functions created in the vector
+      list(set = set, get = get,  ## list the four functions created
       setinverse = setinverse,
       getinverse = getinverse)
 }
@@ -43,4 +43,3 @@ cacheSolve <- function(x, ...) {
       x$setinverse(m)       ## cache the inverted matrix for future use
       m                     ## return the inverted matrix
 }
-
