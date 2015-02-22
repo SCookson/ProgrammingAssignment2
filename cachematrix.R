@@ -1,21 +1,22 @@
 ## Two functions to cache the inverse of a matrix
-## For brevity, we are assuming that the matrix can be inverted
+## For simplicity, we are assuming that the matrix can be inverted
 
-## makeCacheMatrix: This function creates a special "matrix" object that can cache its inverse.
-## cacheSolve: This function computes the inverse of the special "matrix" returned by makeCacheMatrix above. 
+## makeCacheMatrix: This function creates a special "matrix" object that can cache its inverse
+## cacheSolve: This function computes the inverse of the special "matrix" returned by makeCacheMatrix above
 
 ## makeCacheMatrix generates a list of 4 newly created functions:
 ## i.   set: which recreates the original matrix
 ## ii.  get: which reaches back into the calling environment to retrieve the above matrix
 ## iii. setinverse: generates the inverse of the above matrix and caches it
-## iv.  getinverse: reaches back into the calling environment to retrieve the inverted matrix
+## iv.  getinverse: retrieves the inverted matrix from the cache
 
 makeCacheMatrix <- function(x = matrix()) {	
       m <- NULL  		## 'm' is an empty matrix within the makeCacheMatrix environment
       set <- function(y) {	## i. Function recreating original matrix
-      x <<- y  		  ## Deep assignment: so inputted matrix 'x' can be recalled outside of this environment 
+      x <<- y       ## Deep assignment: so inputted matrix 'x' can be recalled outside of this environment 
       m <<- NULL		## Deep assignment: reset 'm' to be an empty matrix outside this environment
-                    ## So later on we don't call the wrong matrix from the cache - could happen if we run these functions on multiple matrices
+                    ## So later on we don't call the wrong matrix from the cache 
+                    ## which could happen if we run these functions on multiple matrices
       }
       get <- function() x	        ## ii. Function returning matrix 'x'
       setinverse <- function(solve) m <<- solve	## iii. Function calculating the inverted matrix
