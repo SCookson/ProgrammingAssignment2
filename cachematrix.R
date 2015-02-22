@@ -4,7 +4,6 @@
 ## makeCacheMatrix: This function creates a special "matrix" object that can cache its inverse.
 ## cacheSolve: This function computes the inverse of the special "matrix" returned by makeCacheMatrix above. 
 
-
 ## makeCacheMatrix generates a list of 4 newly created functions:
 ## i.   set: which recreates the original matrix
 ## ii.  get: which reaches back into the calling environment to retrieve the above matrix
@@ -14,8 +13,8 @@
 makeCacheMatrix <- function(x = matrix()) {	
       m <- NULL  		## 'm' is an empty matrix within the makeCacheMatrix environment
       set <- function(y) {	## i. Function recreating original matrix
-      x <<- y  		  ## Deep assignment: so inputted matrix 'x' can be recalled outside of the makeCacheMatrix environment 
-      m <<- NULL		## Deep assignment: so 'm' is still an empty vector outside the makeCacheMatrix environment
+      x <<- y  		  ## Deep assignment: so inputted matrix 'x' can be recalled outside of this environment 
+      m <<- NULL		## Deep assignment: so 'm' is still an empty vector outside this environment
       }
       get <- function() x	        ## ii. Function returning matrix 'x'
       setinverse <- function(solve) m <<- solve	## iii. Function calculating the inverted matrix
@@ -31,10 +30,12 @@ cacheSolve <- function(x, ...) {
       m <- x$getinverse()   ## define matrix 'm' to be the cached inverted matrix 
       if(!is.null(m)) {     ## check for the inverted matrix in the cache
       ## if it's a cache hit ...
-      message("getting cached data")
+      ## this code will run quickly
+      message("getting cached data")  ## let the user know we are retrieving from the cache
       return(m)             ## return the inverted matrix from the cache
-      }                     
+      }                           
       ## if it's a cache miss ...
+      ## this code may take a some time to run if the matrix is large
       data <- x$get()       ## get function retrieves the original matrix 'x'
       m <- solve(data, ...) ## invert the retrieved matrix
       x$setinverse(m)       ## cache the inverted matrix for future use
