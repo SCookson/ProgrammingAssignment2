@@ -11,10 +11,10 @@
 ## iv.  getinverse: retrieves the inverted matrix from the cache
 
 makeCacheMatrix <- function(x = matrix()) {	
-      m <- NULL  		## 'm' is an empty matrix within the makeCacheMatrix environment
+      m <- NULL     ## 'm' is an empty matrix within the makeCacheMatrix environment
       set <- function(y) {	## i. Function recreating original matrix
       x <<- y       ## Deep assignment: so inputted matrix 'x' can be recalled outside of this environment 
-      m <<- NULL		## Deep assignment: reset 'm' to be an empty matrix outside this environment
+      m <<- NULL    ## Deep assignment: reset 'm' to be an empty matrix outside this environment
                     ## So later on we don't call the wrong matrix from the cache 
                     ## which could happen if we run these functions on multiple matrices
       }
@@ -39,7 +39,7 @@ cacheSolve <- function(x, ...) {
       }                           
       ## if it's a cache miss ...
       ## (because it's the 1st time we have run this function on this matrix OR we changed matrices at some point)
-      ## this code may take a some time to run if the matrix is large
+      ## this code may take some time to run if the matrix is large
       data <- x$get()       ## get function retrieves the original matrix 'x'
       m <- solve(data, ...) ## invert the retrieved matrix
       x$setinverse(m)       ## cache the inverted matrix for future use
